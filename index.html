@@ -31,7 +31,7 @@ body {
   font-family: "Quicksand", system-ui, -apple-system, sans-serif;
   color: var(--ink);
   background-image:
-              url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=80"),
+              url("background.jpg"),
               radial-gradient(circle at 20% 20%, var(--pink-2), transparent 40%),
               radial-gradient(circle at 80% 0%, #ffe6f2, transparent 45%),
               linear-gradient(135deg, var(--lavender), #ffe6ee 45%, #fff5f9);
@@ -62,12 +62,13 @@ body {
 }
 
 .final-image {
-  width: min(1000px, 94vw);
-  max-height: 88vh;
+  width: min(1050px, 96vw);
+  max-height: 90vh;
   object-fit: contain;
   border-radius: 0;
   box-shadow: none;
   border: none;
+  transform: scale(1.04);
 }
 
 .hearts {
@@ -162,6 +163,24 @@ h1 {
   justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
+}
+
+.heart-gifs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 18px 0 10px;
+}
+
+.heart-gifs img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 16px;
+  overflow: hidden;
+  background: transparent;
+  filter: drop-shadow(0 10px 16px rgba(230, 62, 92, 0.25));
 }
 
 .final-media {
@@ -270,6 +289,11 @@ button:active {
   .subtitle {
     font-size: 1rem;
   }
+
+  .heart-gifs img {
+    width: 84px;
+    height: 84px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -299,6 +323,10 @@ button:active {
   <h1>Happy Engagement Anniversary! 💍❤️</h1>
   <p class="subtitle">Celebrating the promise we made and the love that keeps growing.</p>
 
+  <div class="heart-gifs" aria-hidden="true">
+    <img class="heart-gif" src="heart.gif" data-fallback="https://media.giphy.com/media/l4pTdcifPZLpDjL1e/giphy.gif|https://media.tenor.com/1D1VgK7i8jUAAAAC/heart-love.gif|https://i.gifer.com/2Kbm.gif" alt="Animated heart" loading="lazy">
+  </div>
+
   <div class="question-card" aria-live="polite">
     <p class="question-text" id="questionText"></p>
   </div>
@@ -323,6 +351,22 @@ const questions = [
 ];
 
 let currentIndex = 0;
+
+function attachHeartGifFallbacks() {
+  const gifImages = document.querySelectorAll(".heart-gif");
+  gifImages.forEach((img) => {
+    const fallbackList = img.dataset.fallback ? img.dataset.fallback.split("|") : [];
+    const sources = [img.getAttribute("src"), ...fallbackList].filter(Boolean);
+    let sourceIndex = 0;
+
+    img.addEventListener("error", () => {
+      sourceIndex += 1;
+      if (sourceIndex < sources.length) {
+        img.src = sources[sourceIndex];
+      }
+    });
+  });
+}
 
 function renderQuestion() {
   const questionText = document.getElementById("questionText");
@@ -354,6 +398,7 @@ function chooseAnswer(name) {
 }
 
 renderQuestion();
+attachHeartGifFallbacks();
 </script>
 
 </body>
