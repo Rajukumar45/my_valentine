@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Be My Valentine?</title>
+<title>Happy Anniversary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
@@ -30,10 +30,44 @@ body {
   place-items: center;
   font-family: "Quicksand", system-ui, -apple-system, sans-serif;
   color: var(--ink);
-  background: radial-gradient(circle at 20% 20%, var(--pink-2), transparent 40%),
+  background-image:
+              url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=80"),
+              radial-gradient(circle at 20% 20%, var(--pink-2), transparent 40%),
               radial-gradient(circle at 80% 0%, #ffe6f2, transparent 45%),
               linear-gradient(135deg, var(--lavender), #ffe6ee 45%, #fff5f9);
+  background-size: cover, auto, auto, auto;
+  background-position: center, center, center, center;
+  background-repeat: no-repeat;
   overflow: hidden;
+}
+
+.final-screen {
+  background-image:
+              radial-gradient(circle at 20% 20%, var(--pink-2), transparent 40%),
+              radial-gradient(circle at 80% 0%, #ffe6f2, transparent 45%),
+              linear-gradient(135deg, var(--lavender), #ffe6ee 45%, #fff5f9);
+  background-size: auto, auto, auto;
+  background-position: center, center, center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.final-message {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.final-image {
+  width: min(1000px, 94vw);
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
 }
 
 .hearts {
@@ -102,6 +136,27 @@ h1 {
   color: #6b4c5d;
 }
 
+.question-card {
+  margin: 18px 0 28px;
+  padding: 20px 18px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgba(244, 194, 215, 0.6);
+}
+
+.question-text {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #5c3c4a;
+}
+
+.question-count {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #8b6a7b;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
@@ -109,36 +164,102 @@ h1 {
   flex-wrap: wrap;
 }
 
+.final-media {
+  margin-top: 22px;
+  display: none;
+  justify-content: center;
+}
+
+.final-media.is-visible {
+  display: flex;
+}
+
+.final-media img,
+.final-media video {
+  width: min(320px, 80vw);
+  border-radius: 22px;
+  box-shadow: 0 14px 30px rgba(230, 62, 92, 0.25);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
 button {
   font-size: 1.05rem;
-  padding: 12px 28px;
+  padding: 12px 34px;
   border-radius: 999px;
-  border: none;
+  border: 1px solid #f06a93;
   cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #fff;
+  background: linear-gradient(180deg, #ff7fb0 0%, #ff5f99 45%, #f04886 100%);
+  box-shadow:
+    0 10px 18px rgba(240, 72, 134, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(188, 25, 88, 0.35);
+  text-shadow: 0 1px 0 rgba(132, 10, 59, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  inset: 2px 6px 55% 6px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  opacity: 0.9;
+  z-index: 0;
+}
+
+button:hover::before {
+  opacity: 1;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 -4px 10px rgba(179, 22, 78, 0.4);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+button span {
+  position: relative;
+  z-index: 1;
+}
+
+button:active {
+  transform: translateY(1px) scale(0.99);
 }
 
 .btn-yes {
-  background: linear-gradient(135deg, var(--rose), var(--rose-dark));
-  color: var(--white);
-  box-shadow: 0 10px 20px rgba(230, 62, 92, 0.3);
+  background: linear-gradient(180deg, #ff7fb0 0%, #ff5f99 45%, #f04886 100%);
 }
 
 .btn-yes:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 14px 26px rgba(230, 62, 92, 0.38);
+  filter: brightness(1.03);
+  box-shadow:
+    0 14px 24px rgba(240, 72, 134, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(188, 25, 88, 0.35);
 }
 
 .btn-no {
-  background: rgba(255, 255, 255, 0.9);
-  color: #7b5e6b;
-  border: 2px solid #f4c2d7;
-  box-shadow: 0 8px 16px rgba(123, 94, 107, 0.12);
+  background: linear-gradient(180deg, #ff86b6 0%, #ff6aa4 45%, #f45693 100%);
 }
 
 .btn-no:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.03);
+  box-shadow:
+    0 14px 24px rgba(240, 72, 134, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(188, 25, 88, 0.35);
 }
 
 @media (max-width: 480px) {
@@ -175,31 +296,64 @@ button {
 </div>
 
 <main class="card">
-  <h1>Will you be my Valentine? ❤️</h1>
-  <p class="subtitle">A tiny question with a big smile behind it.</p>
+  <h1>Happy Engagement Anniversary! 💍❤️</h1>
+  <p class="subtitle">Celebrating the promise we made and the love that keeps growing.</p>
+
+  <div class="question-card" aria-live="polite">
+    <p class="question-text" id="questionText"></p>
+  </div>
 
   <div class="buttons">
-    <button class="btn-yes" onclick="yesClick()">Yes</button>
-    <button class="btn-no" id="no" onmouseover="moveNo()">No</button>
+    <button class="btn-no" id="rajBtn" onclick="chooseAnswer('Raj')"><span>Raj</span></button>
+    <button class="btn-no" id="munnyBtn" onclick="chooseAnswer('Munny')"><span>Munny</span></button>
+  </div>
+
+  <div class="final-media" id="finalMedia" aria-hidden="true">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Animated_butterfly.gif" alt="Animated butterfly" loading="lazy">
   </div>
 </main>
 
 <script>
-function yesClick() {
-  alert("Yay!!! ❤️🥰");
+const questions = [
+  "Who feels luckier? 🍀",
+  "Who supports more?",
+  "Who understands better?",
+  "Who completes the other? 🤍",
+  "Who loves more? ❤️"
+];
+
+let currentIndex = 0;
+
+function renderQuestion() {
+  const questionText = document.getElementById("questionText");
+
+  questionText.textContent = questions[currentIndex];
 }
 
-function moveNo() {
-  const noButton = document.getElementById("no");
-  const padding = 16;
-  const maxX = window.innerWidth - noButton.offsetWidth - padding;
-  const maxY = window.innerHeight - noButton.offsetHeight - padding;
-  const x = Math.random() * Math.max(maxX, 0);
-  const y = Math.random() * Math.max(maxY, 0);
-  noButton.style.position = "fixed";
-  noButton.style.left = x + "px";
-  noButton.style.top = y + "px";
+function chooseAnswer(name) {
+  if (currentIndex < questions.length - 1) {
+    currentIndex += 1;
+    renderQuestion();
+    return;
+  }
+  document.body.classList.add("final-screen");
+  document.body.innerHTML = "";
+
+  const messageCard = document.createElement("div");
+  messageCard.className = "final-message";
+
+  const finalImage = document.createElement("img");
+  finalImage.className = "final-image";
+  finalImage.src = "anniversary-image.png";
+  finalImage.alt = "Engagement anniversary message";
+  finalImage.loading = "lazy";
+
+  messageCard.appendChild(finalImage);
+
+  document.body.appendChild(messageCard);
 }
+
+renderQuestion();
 </script>
 
 </body>
